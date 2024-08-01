@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
@@ -22,17 +23,20 @@ func (u *User) setNewName(newName string) {
 }
 
 func home_page(w http.ResponseWriter, r *http.Request) {
-	bob := User{"Bob", 25, -50, 4.2, 0.8}
-	bob.setNewName("Alex")
-	fmt.Fprintf(w, bob.gerAllInfo())
+	//bob := User{"Bob", 25, -50, 4.2, 0.8}
+	//fmt.Fprintf(w, "<b>Main Text</b>")
+	tmpl, _ := template.ParseFiles("templates/index.html")
+	tmpl.Execute(w, nil)
 }
 
 func about_page(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "About page")
+	tmpl, _ := template.ParseFiles("templates/about.html")
+	tmpl.Execute(w, nil)
 }
 
 func blog_page(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Blog page")
+	tmpl, _ := template.ParseFiles("templates/blog.html")
+	tmpl.Execute(w, nil)
 }
 
 func handleRequest() {
